@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 36px;
+            text-align: center;
+        }
+        #searchBar {
+            width: 80vw; /* Adjust this to change the size of the search bar */
+            max-width: 600px; /* Set a maximum width */
+            height: 50px;
+            font-size: 20px;
+            padding: 0 15px; /* Add some padding */
+            border-radius: 25px; /* More rounded corners */
+            border: 2px solid #ccc;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+            margin-bottom: 10px; /* Space below the search bar */
+        }
+        #searchBar:focus {
+            outline: none;
+            border-color: #007bff; /* Change border color on focus */
+        }
+        #searchEngine {
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px; /* Space above the dropdown */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Simple Browser</h1>
+    <input type="text" id="searchBar" placeholder="Search or type a URL" onkeydown="if (event.keyCode == 13) search()">
+    <select id="searchEngine">
+        <option value="https://www.google.com/search?q=" selected>Google</option>
+        <option value="https://www.bing.com/search?q=">Bing</option>
+        <option value="https://search.yahoo.com/search?p=">Yahoo</option>
+        <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+    </select>
+    <script>
+        function search() {
+            var query = document.getElementById('searchBar').value;
+            var searchEngine = document.getElementById('searchEngine').value;
+            if (!query.startsWith('http://') && !query.startsWith('https://')) {
+                if (query.includes('.') && !query.includes(' ')) {
+                    query = 'http://' + query;
+                } else {
+                    query = searchEngine + query; // Use the selected search engine
+                }
+            }
+            window.location.href = query;
+        }
+    </script>
+</body>
+</html>
